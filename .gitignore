@@ -1,0 +1,5 @@
+# Project exclude paths
+/.gradle/
+/LibraryIndexer/out/
+/LibraryIndexer/out/production/classes/
+/LibraryIndexer/out/test/classes/
