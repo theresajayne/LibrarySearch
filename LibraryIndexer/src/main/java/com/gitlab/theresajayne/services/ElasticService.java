@@ -16,12 +16,14 @@ public class ElasticService
     {
         try
         {
-            URL elasticUrl = new URL("http://" + url + "/" + index);
+            URL elasticUrl = new URL("http://" + url + "/" + index+"/_doc/");
+            System.out.println(elasticUrl);
             HttpURLConnection putConnection = (HttpURLConnection)elasticUrl.openConnection();
-            putConnection.setRequestMethod("PUT");
+            putConnection.setRequestMethod("POST");
             putConnection.setRequestProperty("Content-Type","application/json");
             putConnection.setDoOutput(true);
             OutputStream os = putConnection.getOutputStream();
+            System.out.println(payload);
             os.write(payload.getBytes());
             os.flush();
             os.close();
@@ -30,7 +32,7 @@ public class ElasticService
             System.out.println("PUT Response Code : "+responseCode);
             System.out.println("PUT Response Message : "+ putConnection.getResponseMessage());
 
-            if(responseCode == HttpURLConnection.HTTP_OK)
+            if(responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED)
             {
                 BufferedReader in = new BufferedReader(new InputStreamReader(putConnection.getInputStream()));
                 String inputLine;

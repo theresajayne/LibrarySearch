@@ -29,13 +29,18 @@ public class IndexService
         String uuid = document.getUUID().toString();
         String keywords = document.getKeywords();
         String[] contents = document.getFileContents();
+        StringBuffer buffer = new StringBuffer();
+        for(String line:contents)
+        {
+            buffer.append(line);
+        }
         JSONObject jsonObject= new JSONObject();
         jsonObject.put("UUID",uuid);
         jsonObject.put("TITLE",title);
         jsonObject.put("AUTHOR",author);
         jsonObject.put("keywords",keywords);
         jsonObject.put("description",description);
-        jsonObject.put("contents",contents);
+        jsonObject.put("contents",buffer.toString());
         return jsonObject.toJSONString();
     }
 }
